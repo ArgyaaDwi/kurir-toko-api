@@ -1,6 +1,6 @@
 # Kurir Toko API
 
-POC backend untuk integrasi `Kurir Toko` ke sistem omnichannel memakai `FastAPI` dan `Docker`.
+backend untuk integrasi `Kurir Toko` ke sistem omnichannel memakai `FastAPI` dan `Docker (kalo mau wkwkw)`.
 
 ## Fitur awal
 
