@@ -7,10 +7,14 @@ backend API untuk integrasi `Kurir Toko` memakai `FastAPI` dan `Docker (kalo mau
 - `GET /health`
 - `POST /api/v1/routes/optimize`
 - `POST /api/v1/batches/plan`
+- `POST /api/v1/pricing/estimate`
+- `POST /api/v1/pricing/global-estimate`
 - Geocoding alamat
 - Klasifikasi motor vs mobil
 - Filter order `Kurir Toko`
 - Optimasi rute
+- Hitung biaya kirim dari koordinat asal ke tujuan
+- Hitung biaya kirim global tanpa `vehicle_type`
 
 ## Jalankan lokal
 
@@ -29,6 +33,17 @@ uvicorn app.main:app --reload
 copy .env.example .env
 isi .env dengan API_KEY
 docker compose up --build
+```
+
+## Variabel biaya global
+
+Atur di `.env` kalau mau ubah ongkir global endpoint terpisah:
+
+```env
+GLOBAL_PRICING_BASE_FEE=0
+GLOBAL_PRICING_COST_PER_KM=1500
+GLOBAL_PRICING_MINIMUM_FEE=0
+GLOBAL_PRICING_ROUTE_VEHICLE_TYPE=MOBIL
 ```
 
 ## Request contoh banyak Order untuk cari rute
@@ -144,5 +159,82 @@ docker compose up --build
   ],
   "kurir_toko_only": true,
   "algorithm": "cluster"
+}
+```
+
+## Request contoh hitung biaya kirim
+
+```json
+{
+  "origin": {
+    "lat": -7.317566,
+    "lng": 112.764234
+  },
+  "destination": {
+    "lat": -7.2782163,
+    "lng": 112.7572735
+  },
+  "vehicle_type": "MOTOR"
+}
+```
+
+## Response contoh hitung biaya kirim
+
+```json
+{
+  "origin": {
+    "lat": -7.317566,
+    "lng": 112.764234
+  },
+  "destination": {
+    "lat": -7.2782163,
+    "lng": 112.7572735
+  },
+  "vehicle_type": "MOTOR",
+  "distance_km": 6.41,
+  "duration_seconds": 493.5,
+  "cost_per_km": 1000,
+  "total_cost": 6410,
+  "provider": "OSRM",
+  "status": "osrm"
+}
+```
+
+## Request contoh hitung biaya kirim global
+
+```json
+{
+  "origin": {
+    "lat": -7.317566,
+    "lng": 112.764234
+  },
+  "destination": {
+    "lat": -7.2782163,
+    "lng": 112.7572735
+  }
+}
+```
+
+## Response contoh hitung biaya kirim global
+
+```json
+{
+  "origin": {
+    "lat": -7.317566,
+    "lng": 112.764234
+  },
+  "destination": {
+    "lat": -7.2782163,
+    "lng": 112.7572735
+  },
+  "routing_vehicle_type": "MOBIL",
+  "distance_km": 6.41,
+  "duration_seconds": 493.5,
+  "base_fee": 0,
+  "cost_per_km": 1500,
+  "minimum_fee": 0,
+  "total_cost": 9615,
+  "provider": "OSRM",
+  "status": "osrm"
 }
 ```
