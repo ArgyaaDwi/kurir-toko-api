@@ -193,7 +193,6 @@ GLOBAL_PRICING_RESPONSE_EXAMPLE = {
         "lat": -7.2782163,
         "lng": 112.7572735,
     },
-    "routing_vehicle_type": "MOBIL",
     "distance_km": 6.41,
     "duration_seconds": 493.5,
     "base_fee": 0.0,

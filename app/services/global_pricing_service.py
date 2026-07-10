@@ -28,7 +28,6 @@ def calculate_global_delivery_cost(request: GlobalDeliveryCostRequest) -> Global
     return GlobalDeliveryCostResponse(
         origin=request.origin,
         destination=request.destination,
-        routing_vehicle_type=routing_vehicle_type,
         distance_km=distance_km,
         duration_seconds=duration_seconds,
         base_fee=base_fee,

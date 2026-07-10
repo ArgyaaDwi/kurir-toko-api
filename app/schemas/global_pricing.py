@@ -10,7 +10,6 @@ class GlobalDeliveryCostRequest(BaseModel):
 class GlobalDeliveryCostResponse(BaseModel):
     origin: CoordinateInput
     destination: CoordinateInput
-    routing_vehicle_type: str
     distance_km: float
     duration_seconds: float
     base_fee: float
