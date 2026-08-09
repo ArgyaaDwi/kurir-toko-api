@@ -1,7 +1,8 @@
 from fastapi import FastAPI
 
-from app.api.v1.router import api_router
 from app.api.openapi_examples import ROOT_RESPONSE_EXAMPLE
+from app.api.v1.router import api_router as api_v1_router
+from app.api.v2.router import api_router as api_v2_router
 
 
 openapi_tags = [
@@ -10,6 +11,7 @@ openapi_tags = [
     {"name": "routes", "description": "Optimasi urutan pengantaran untuk banyak order."},
     {"name": "batches", "description": "Pembagian order ke batch berdasarkan cutoff time."},
     {"name": "pricing", "description": "Perhitungan ongkir dari koordinat asal ke tujuan."},
+    {"name": "v2-retail", "description": "Endpoint payload real Kurir Toko Retail dari Omni."},
 ]
 
 
@@ -20,7 +22,8 @@ app = FastAPI(
     openapi_tags=openapi_tags,
 )
 
-app.include_router(api_router, prefix="/api/v1")
+app.include_router(api_v1_router, prefix="/api/v1")
+app.include_router(api_v2_router, prefix="/api/v2")
 
 
 @app.get(

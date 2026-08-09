@@ -236,3 +236,99 @@ BATCH_RESPONSE_EXAMPLE = {
         }
     ],
 }
+
+RETAIL_ORDER_ESTIMATE_REQUEST_EXAMPLES = {
+    "web_order": {
+        "summary": "Payload real order Web/Omni",
+        "description": "Contoh payload dari observer Omni untuk Kurir Toko Retail.",
+        "value": {
+            "data": {
+                "account_id": 10444,
+                "order": {
+                    "local_id": "WEB260806E713",
+                    "order_batch_code": None,
+                    "ordered_at": "2026-08-06 15:33:17",
+                    "shipping_price": "6350",
+                    "shipping_provider": "Kurir Toko Retail - Sesi Siang",
+                    "nextday": True,
+                    "note": "-",
+                    "internal_note": "-",
+                    "warehouse_id": 759,
+                    "totalWeight": "4.8",
+                    "address": {
+                        "name": "dilaaa",
+                        "phone": "086656556544",
+                        "address_1": "Jalan Gubeng Kertajaya Gang IX, RW 04, Airlangga, Gubeng, Surabaya, East Java, 60286, Indonesia",
+                        "address_2": "",
+                        "sub_district": "Gubeng",
+                        "district": "Gubeng",
+                        "city": "Kota Surabaya",
+                        "province": "Jawa Timur",
+                        "country": "Indonesia",
+                        "postal_code": "60286",
+                        "latitude": "-7.2749197116067",
+                        "longitude": "112.75754175306",
+                    },
+                    "item_lines": [
+                        {
+                            "local_id": "dbklik5_18108",
+                            "variant_id": 0,
+                            "sku": "AKBL04",
+                            "name": "Keyboard Mouse Wireless Logitech MK220",
+                            "price": 300000,
+                            "sale_price": 0,
+                            "quantity": 4,
+                            "weight": 1.2,
+                            "warehouse_splits": [
+                                {
+                                    "warehouse_id": 759,
+                                    "warehouse_name": "Surabaya",
+                                    "qty": 4,
+                                }
+                            ],
+                            "item_type": "regular",
+                        }
+                    ],
+                    "payment": {
+                        "status_payment": "1",
+                        "payment_method": "Xendit Va Mandiri",
+                    },
+                },
+            }
+        },
+    }
+}
+
+RETAIL_ORDER_ESTIMATE_RESPONSE_EXAMPLE = {
+    "account_id": 10444,
+    "order_local_id": "WEB260806E713",
+    "shipping_provider": "Kurir Toko Retail - Sesi Siang",
+    "eligible": True,
+    "warehouse": {
+        "warehouse_id": 759,
+        "code": "SUB",
+        "name": "Surabaya",
+        "lat": -7.317566,
+        "lng": 112.764234,
+    },
+    "destination": {
+        "name": "dilaaa",
+        "phone": "086656556544",
+        "address": "Jalan Gubeng Kertajaya Gang IX, RW 04, Airlangga, Gubeng, Surabaya, East Java, 60286, Indonesia, Kota Surabaya, Jawa Timur",
+        "lat": -7.2749197116067,
+        "lng": 112.75754175306,
+    },
+    "total_weight_kg": 4.8,
+    "item_count": 4,
+    "distance_km": 5.79,
+    "duration_seconds": 734.301,
+    "base_fee": 0.0,
+    "cost_per_km": 1500.0,
+    "minimum_fee": 0.0,
+    "current_shipping_price": 6350.0,
+    "calculated_shipping_price": 8685.0,
+    "price_difference": 2335.0,
+    "shipping_price_changed": True,
+    "provider": "GraphHopper",
+    "status": "graphhopper",
+}
