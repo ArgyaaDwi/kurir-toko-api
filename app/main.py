@@ -11,7 +11,7 @@ openapi_tags = [
     {"name": "routes", "description": "Optimasi urutan pengantaran untuk banyak order."},
     {"name": "batches", "description": "Pembagian order ke batch berdasarkan cutoff time."},
     {"name": "pricing", "description": "Perhitungan ongkir dari koordinat asal ke tujuan."},
-    {"name": "v2-retail", "description": "Endpoint payload real Kurir Toko Retail dari Omni."},
+    {"name": "v2-routes", "description": "Optimasi rute dari payload real Laravel/Omni."},
 ]
 
 

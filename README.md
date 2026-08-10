@@ -9,14 +9,14 @@ backend API untuk integrasi `Kurir Toko` memakai `FastAPI` dan `Docker (kalo mau
 - `POST /api/v1/batches/plan`
 - `POST /api/v1/pricing/estimate`
 - `POST /api/v1/pricing/global-estimate`
-- `POST /api/v2/retail/orders/shipping-estimate`
+- `POST /api/v2/routes/optimize`
 - Geocoding alamat
 - Klasifikasi motor vs mobil
 - Filter order `Kurir Toko`
 - Optimasi rute
 - Hitung biaya kirim dari koordinat asal ke tujuan
 - Hitung biaya kirim global tanpa `vehicle_type`
-- Hitung ongkir dari payload real order Web/Omni untuk `Kurir Toko Retail`
+- Optimasi rute dari payload real Laravel/Omni untuk `Kurir Toko Retail`
 
 ## Jalankan lokal
 
@@ -240,37 +240,6 @@ GLOBAL_PRICING_ROUTE_VEHICLE_TYPE=MOBIL
 }
 ```
 
-## Endpoint v2 payload real Web/Omni
+## Dokumentasi v2 route optimize
 
-Endpoint ini dipakai ketika order dari Web sudah masuk Omni, lalu observer Laravel memanggil API ini untuk menghitung ulang ongkir `Kurir Toko Retail`.
-
-```http
-POST /api/v2/retail/orders/shipping-estimate
-```
-
-Alur singkat:
-
-- API membaca `data.order.warehouse_id` sebagai gudang asal.
-- API membaca `data.order.address.latitude` dan `data.order.address.longitude` sebagai tujuan.
-- Semua order v2 dihitung dengan routing internal `MOBIL`.
-- Biaya memakai variabel global `GLOBAL_PRICING_BASE_FEE`, `GLOBAL_PRICING_COST_PER_KM`, dan `GLOBAL_PRICING_MINIMUM_FEE`.
-- Response mengembalikan ongkir lama dari Omni, ongkir hasil hitung, selisih, jarak, durasi, dan provider routing.
-
-Contoh response ringkas:
-
-```json
-{
-  "account_id": 10444,
-  "order_local_id": "WEB260806E713",
-  "shipping_provider": "Kurir Toko Retail - Sesi Siang",
-  "eligible": true,
-  "distance_km": 5.79,
-  "duration_seconds": 734.301,
-  "current_shipping_price": 6350,
-  "calculated_shipping_price": 8685,
-  "price_difference": 2335,
-  "shipping_price_changed": true,
-  "provider": "GraphHopper",
-  "status": "graphhopper"
-}
-```
+Dokumentasi endpoint payload Laravel/Omni ada di `docs/api-v2-routes-optimize.md`.
