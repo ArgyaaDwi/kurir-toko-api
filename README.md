@@ -242,4 +242,4 @@ GLOBAL_PRICING_ROUTE_VEHICLE_TYPE=MOBIL
 
 ## Dokumentasi v2 route optimize
 
-Dokumentasi endpoint payload Laravel/Omni ada di `docs/api-v2-routes-optimize.md`.
+Dokumentasi endpoint payload Laravel/Omni ada di dir `docs/api-v2-routes-optimize.md`.
