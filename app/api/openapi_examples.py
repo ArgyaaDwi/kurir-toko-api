@@ -203,6 +203,88 @@ GLOBAL_PRICING_RESPONSE_EXAMPLE = {
     "status": "osrm",
 }
 
+V2_GLOBAL_PRICING_REQUEST_EXAMPLES = {
+    "motor": {
+        "summary": "Invoice yang dapat dikirim motor",
+        "description": "Semua SKU dan total berat invoice memenuhi kapasitas motor.",
+        "value": {
+            "origin": {
+                "lat": -7.317566,
+                "lng": 112.764234,
+            },
+            "destination": {
+                "lat": -7.2782163,
+                "lng": 112.7572735,
+            },
+            "items": [
+                {
+                    "sku": "LAMP-LED-12W",
+                    "qty": 2,
+                    "panjang_cm": 20,
+                    "lebar_cm": 15,
+                    "tinggi_cm": 10,
+                    "berat_kg": 0.5,
+                },
+                {
+                    "sku": "KABEL-USB-C-2M",
+                    "qty": 1,
+                    "panjang_cm": 15,
+                    "lebar_cm": 10,
+                    "tinggi_cm": 5,
+                    "berat_kg": 0.2,
+                },
+            ],
+        },
+    },
+    "mobil": {
+        "summary": "Invoice yang wajib dikirim mobil",
+        "description": "Satu SKU melebihi batas panjang motor sehingga seluruh invoice dikirim mobil.",
+        "value": {
+            "origin": {
+                "lat": -7.317566,
+                "lng": 112.764234,
+            },
+            "destination": {
+                "lat": -7.2782163,
+                "lng": 112.7572735,
+            },
+            "items": [
+                {
+                    "sku": "MEJA-LIPAT-120",
+                    "qty": 1,
+                    "panjang_cm": 110,
+                    "lebar_cm": 60,
+                    "tinggi_cm": 75,
+                    "berat_kg": 18,
+                }
+            ],
+        },
+    },
+}
+
+V2_GLOBAL_PRICING_RESPONSE_EXAMPLE = {
+    "origin": {
+        "lat": -7.317566,
+        "lng": 112.764234,
+    },
+    "destination": {
+        "lat": -7.2782163,
+        "lng": 112.7572735,
+    },
+    "vehicle_type": "MOBIL",
+    "vehicle_reason": (
+        "SKU MEJA-LIPAT-120 memiliki panjang 110 cm, melebihi batas motor 100 cm."
+    ),
+    "distance_km": 6.41,
+    "duration_seconds": 554.0,
+    "base_fee": 0.0,
+    "cost_per_km": 2500.0,
+    "minimum_fee": 0.0,
+    "total_cost": 16025.0,
+    "provider": "OSRM",
+    "status": "osrm",
+}
+
 BATCH_REQUEST_EXAMPLES = {
     "basic": {
         "summary": "Bagi order ke batch pengiriman",

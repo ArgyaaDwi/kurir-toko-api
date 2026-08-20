@@ -10,6 +10,7 @@ backend API untuk integrasi `Kurir Toko` memakai `FastAPI` dan `Docker (kalo mau
 - `POST /api/v1/pricing/estimate`
 - `POST /api/v1/pricing/global-estimate`
 - `POST /api/v2/routes/optimize`
+- `POST /api/v2/pricing/global-estimate`
 - Geocoding alamat
 - Klasifikasi motor vs mobil
 - Filter order `Kurir Toko`
@@ -47,6 +48,10 @@ GLOBAL_PRICING_COST_PER_KM=1500
 GLOBAL_PRICING_MINIMUM_FEE=0
 GLOBAL_PRICING_ROUTE_VEHICLE_TYPE=MOBIL
 ```
+
+## Pricing v2 berdasarkan isi invoice
+
+`POST /api/v2/pricing/global-estimate` memilih `MOTOR` atau `MOBIL` dari SKU, dimensi, berat, dan kuantitas item pada invoice. Tarif yang dipakai mengikuti kendaraan terpilih, sedangkan endpoint v1 global pricing tidak berubah. Lihat [dokumentasi pricing v2](docs/api-v2-pricing-global-estimate.md).
 
 ## Request contoh banyak Order untuk cari rute
 
