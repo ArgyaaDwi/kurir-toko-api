@@ -12,6 +12,10 @@ openapi_tags = [
     {"name": "batches", "description": "Pembagian order ke batch berdasarkan cutoff time."},
     {"name": "pricing", "description": "Perhitungan ongkir dari koordinat asal ke tujuan."},
     {"name": "v2-routes", "description": "Optimasi rute dari payload real Laravel/Omni."},
+    {
+        "name": "v2-pricing",
+        "description": "Pemilihan kendaraan dan perhitungan ongkir berdasarkan isi invoice.",
+    },
 ]
 
 
