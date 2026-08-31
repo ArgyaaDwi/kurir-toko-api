@@ -9,6 +9,7 @@ backend API untuk integrasi `Kurir Toko` memakai `FastAPI` dan `Docker (kalo mau
 - `POST /api/v1/batches/plan`
 - `POST /api/v1/pricing/estimate`
 - `POST /api/v1/pricing/global-estimate`
+- `POST /api/v1/nearest-wh`
 - `POST /api/v2/routes/optimize`
 - `POST /api/v2/pricing/global-estimate`
 - Geocoding alamat
@@ -17,6 +18,7 @@ backend API untuk integrasi `Kurir Toko` memakai `FastAPI` dan `Docker (kalo mau
 - Optimasi rute
 - Hitung biaya kirim dari koordinat asal ke tujuan
 - Hitung biaya kirim global tanpa `vehicle_type`
+- Cari warehouse terdekat berdasarkan rute mobil
 - Optimasi rute dari payload real Laravel/Omni untuk `Kurir Toko Retail`
 
 ## Jalankan lokal
