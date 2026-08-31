@@ -16,6 +16,7 @@ openapi_tags = [
         "name": "v2-pricing",
         "description": "Pemilihan kendaraan dan perhitungan ongkir berdasarkan isi invoice.",
     },
+    {"name": "warehouses", "description": "Pencarian warehouse terdekat dari koordinat user."},
 ]
 
 
