@@ -1,0 +1,51 @@
+WAREHOUSES = [
+    {
+        "code": "H - BALI",
+        "name": "Bali",
+        "address": "Jl. Akasia XV No.25, Sumerta Kelod",
+        "latitude": -8.6545,
+        "longitude": 115.2270,
+    },
+    {
+        "code": "Y - SBY",
+        "name": "Surabaya",
+        "address": "Jl. Raya Tenggilis Mejoyo No. AA-3, Kali Rungkut",
+        "latitude": -7.31757,
+        "longitude": 112.76166,
+    },
+    {
+        "code": "A - ITC",
+        "name": "Surabaya-ITC",
+        "address": "ITC Surabaya Mega Grosir, Jl. Gembong No.20-30",
+        "latitude": -7.2412,
+        "longitude": 112.7467,
+    },
+    {
+        "code": "C6",
+        "name": "Surabaya-Lebak",
+        "address": "Pergudangan Lebak Sari Blok N-S No.28",
+        "latitude": -7.2640,
+        "longitude": 112.7540,
+    },
+    {
+        "code": "F - MLG",
+        "name": "Malang",
+        "address": "Jl. Pulau Sayang No.16, Kasin",
+        "latitude": -7.9820,
+        "longitude": 112.6250,
+    },
+    {
+        "code": "E - JOG",
+        "name": "Yogyakarta",
+        "address": "Perum Taman Kencana Sejahtera No.88",
+        "latitude": -7.7600,
+        "longitude": 110.4131,
+    },
+    {
+        "code": "D - SMG",
+        "name": "Semarang",
+        "address": "Jl. Dr. Suratmo No.1197, Kembangarum",
+        "latitude": -6.996495,
+        "longitude": 110.356102,
+    },
+]
