@@ -35,20 +35,21 @@ def format_duration(seconds: float) -> str:
     return f"{hours} jam {minutes} mnt" if hours > 0 else f"{minutes} mnt"
 
 
-def get_route(coords: tuple, vehicle_type: str) -> dict:
+def get_route(coords: tuple, vehicle_type: str, timeout: float | None = None) -> dict:
     if len(coords) < 2:
         return {"distance_km": 0.0, "duration_seconds": 0.0, "geometry": [], "provider": "None", "status": "failed"}
 
     vehicle_config = VEHICLE_CONFIG[vehicle_type]
-    result = graphhopper_route(coords, vehicle_config["gh_profile"])
+    timeout_kwargs = {"timeout": timeout} if timeout is not None else {}
+    result = graphhopper_route(coords, vehicle_config["gh_profile"], **timeout_kwargs)
     if result and result.get("geometry"):
         return result
 
-    result = ors_route(coords, vehicle_config["ors_profile"])
+    result = ors_route(coords, vehicle_config["ors_profile"], **timeout_kwargs)
     if result and result.get("geometry"):
         return result
 
-    result = osrm_route(coords, vehicle_config["osrm_profile"])
+    result = osrm_route(coords, vehicle_config["osrm_profile"], **timeout_kwargs)
     if result and result.get("geometry"):
         return result
 

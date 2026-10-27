@@ -6,7 +6,7 @@ import requests
 from app.core.config import get_settings
 
 
-def graphhopper_route(coords: tuple, profile: str) -> Optional[dict]:
+def graphhopper_route(coords: tuple, profile: str, timeout: float = 20) -> Optional[dict]:
     settings = get_settings()
     if not settings.graphhopper_api_key or len(coords) < 2:
         return None
@@ -21,7 +21,7 @@ def graphhopper_route(coords: tuple, profile: str) -> Optional[dict]:
         "calc_points": True,
     }
     try:
-        response = requests.get(f"{settings.graphhopper_base}/route", params=params, timeout=20)
+        response = requests.get(f"{settings.graphhopper_base}/route", params=params, timeout=timeout)
         if response.status_code == 200:
             data = response.json()
             if data.get("paths"):
@@ -40,7 +40,7 @@ def graphhopper_route(coords: tuple, profile: str) -> Optional[dict]:
     return None
 
 
-def ors_route(coords: tuple, profile: str) -> Optional[dict]:
+def ors_route(coords: tuple, profile: str, timeout: float = 20) -> Optional[dict]:
     settings = get_settings()
     if not settings.ors_api_key or len(coords) < 2:
         return None
@@ -61,7 +61,7 @@ def ors_route(coords: tuple, profile: str) -> Optional[dict]:
             f"{settings.ors_base}/directions/{profile}",
             json=payload,
             headers=headers,
-            timeout=20,
+            timeout=timeout,
         )
         if response.status_code == 200:
             features = response.json().get("features", [])
@@ -81,7 +81,7 @@ def ors_route(coords: tuple, profile: str) -> Optional[dict]:
     return None
 
 
-def osrm_route(coords: tuple, profile: str) -> Optional[dict]:
+def osrm_route(coords: tuple, profile: str, timeout: float = 15) -> Optional[dict]:
     settings = get_settings()
     if len(coords) < 2:
         return None
@@ -90,7 +90,7 @@ def osrm_route(coords: tuple, profile: str) -> Optional[dict]:
         response = requests.get(
             f"{settings.osrm_base}/{profile}/{coord_str}",
             params={"overview": "full", "geometries": "polyline"},
-            timeout=15,
+            timeout=timeout,
         )
         data = response.json()
         if data.get("code") == "Ok" and data.get("routes"):
