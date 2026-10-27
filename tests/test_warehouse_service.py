@@ -50,7 +50,6 @@ class NearestWarehouseServiceTests(unittest.TestCase):
         self.assertEqual(get_route.call_count, 3)
         self.assertEqual(first.data, second.data)
 
-    @patch("app.services.warehouse_service.get_route")
     def test_fallback_provider_result_is_not_cached(self):
         for status in ("osrm", "haversine_fallback"):
             with self.subTest(status=status), patch("app.services.warehouse_service.get_route") as get_route:
