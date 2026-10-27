@@ -14,6 +14,7 @@ TOP_CANDIDATES = 3
 # Timeout per penyedia routing; Omni hanya menunggu 10 detik untuk seluruh request.
 PROVIDER_TIMEOUT_SECONDS = 3
 CACHE_MAX_SIZE = 4096
+CACHEABLE_STATUS = "graphhopper"
 
 _cache: dict[tuple[float, float], NearestWarehouse] = {}
 _cache_lock = Lock()
@@ -52,8 +53,9 @@ def find_nearest_warehouse(request: NearestWarehouseRequest) -> NearestWarehouse
 
     nearest = min((candidate for candidate, _ in results), key=lambda candidate: candidate.distance_km)
 
-    # Estimasi haversine (semua penyedia gagal) tidak disimpan supaya request berikutnya mencoba rute asli lagi.
-    if all(status != "haversine_fallback" for _, status in results):
+    # Hanya hasil GraphHopper yang disimpan: hasil cadangan (OSRM/haversine, mis. saat GraphHopper kena 429)
+    # jaraknya berbeda, jadi request berikutnya mencoba GraphHopper lagi.
+    if all(status == CACHEABLE_STATUS for _, status in results):
         with _cache_lock:
             if len(_cache) >= CACHE_MAX_SIZE:
                 _cache.pop(next(iter(_cache)))

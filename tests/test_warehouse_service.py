@@ -51,15 +51,16 @@ class NearestWarehouseServiceTests(unittest.TestCase):
         self.assertEqual(first.data, second.data)
 
     @patch("app.services.warehouse_service.get_route")
-    def test_haversine_fallback_result_is_not_cached(self, get_route):
-        get_route.side_effect = route_by_destination(
-            {-7.2640: 5.49, -7.31757: 6.1, -7.2412: 4.9}, status="haversine_fallback"
-        )
+    def test_fallback_provider_result_is_not_cached(self):
+        for status in ("osrm", "haversine_fallback"):
+            with self.subTest(status=status), patch("app.services.warehouse_service.get_route") as get_route:
+                warehouse_service._cache.clear()
+                get_route.side_effect = route_by_destination({-7.2640: 5.49, -7.31757: 6.1, -7.2412: 4.9}, status=status)
 
-        find_nearest_warehouse(NearestWarehouseRequest(latitude=-7.2856, longitude=112.7758))
-        find_nearest_warehouse(NearestWarehouseRequest(latitude=-7.2856, longitude=112.7758))
+                find_nearest_warehouse(NearestWarehouseRequest(latitude=-7.2856, longitude=112.7758))
+                find_nearest_warehouse(NearestWarehouseRequest(latitude=-7.2856, longitude=112.7758))
 
-        self.assertEqual(get_route.call_count, 6)
+                self.assertEqual(get_route.call_count, 6)
 
     def test_rejects_coordinates_outside_valid_bounds(self):
         with self.assertRaises(ValueError):
